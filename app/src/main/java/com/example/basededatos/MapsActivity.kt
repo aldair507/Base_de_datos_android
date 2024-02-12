@@ -126,7 +126,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         mediaPlayer?.start()
                         startActivity(intent)
                     } else {
-                        Toast.makeText(this@MapsActivity, "Seleccione un lugar primero", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@MapsActivity, "Seleccione un lugar primero ee", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
