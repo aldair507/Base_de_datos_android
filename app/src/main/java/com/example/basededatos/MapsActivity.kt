@@ -25,9 +25,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: ActivityMapsBinding
     private var mediaPlayer: MediaPlayer? = null
     private lateinit var spinner: Spinner
-    private lateinit var senaButton: Button
-    private lateinit var morroButton: Button
-    private lateinit var parqueButton: Button
+
     private var currentMarker: Marker? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
