@@ -1,6 +1,7 @@
 package com.example.basededatos
 
 import android.content.Intent
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -22,6 +23,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
+    private var mediaPlayer: MediaPlayer? = null
     private lateinit var spinner: Spinner
     private lateinit var senaButton: Button
     private lateinit var morroButton: Button
@@ -37,30 +39,30 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         // Inicializar las vistas después de inflar el diseño
         spinner = binding.spinner
-        senaButton = binding.sena1
-        morroButton = binding.morro1
-        parqueButton = binding.parque
+//        senaButton = binding.sena1
+//        morroButton = binding.morro1
+//        parqueButton = binding.parque
 
-        hideAllButtons()
+//        hideAllButtons()
 
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        binding.parque.setOnClickListener {
-            val parqueCaldasLocation = LatLng(2.4419477932001885, -76.6062739)
-            handleLocation(parqueCaldasLocation)
-        }
-
-        binding.morro1.setOnClickListener {
-            val morroLocation = LatLng(2.4834441115192067, -76.56176399432523)
-            handleLocation(morroLocation)
-        }
-
-        binding.sena1.setOnClickListener {
-            val senaLocation = LatLng(2.444727408287769, -76.60014311631677)
-            handleLocation(senaLocation)
-        }
+//        binding.parque.setOnClickListener {
+//            val parqueCaldasLocation = LatLng(2.4419477932001885, -76.6062739)
+//            handleLocation(parqueCaldasLocation)
+//        }
+//
+//        binding.morro1.setOnClickListener {
+//            val morroLocation = LatLng(2.4834441115192067, -76.56176399432523)
+//            handleLocation(morroLocation)
+//        }
+//
+//        binding.sena1.setOnClickListener {
+//            val senaLocation = LatLng(2.444727408287769, -76.60014311631677)
+//            handleLocation(senaLocation)
+//        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -68,12 +70,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                when (position) {
-                    1 -> showButtons(binding.sena1)
-                    2 -> showButtons(binding.parque)
-                    3 -> showButtons(binding.morro1)
-                    else -> hideAllButtons()
-                }
+//                when (position) {
+//                    1 -> showButtons(binding.sena1)
+//                    2 -> showButtons(binding.parque)
+//                    3 -> showButtons(binding.morro1)
+//                    else -> hideAllButtons()
+//                }
 
                 val location = when (position) {
                     1 -> LatLng(2.483302497351136, -76.561758126264)  // Sena
@@ -89,7 +91,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 }
 
                 binding.info.setOnClickListener {
-                    hideAllButtons()
+//                    hideAllButtons()
                     if (position == 1) {
                         val intent = Intent(this@MapsActivity, LugaresActivity::class.java)
                         intent.putExtra("nombre_lugar", "Sena")
@@ -97,6 +99,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         intent.putExtra("latitude", 2.483302497351136)
                         intent.putExtra("longitude", -76.561758126264)
                         intent.putExtra("info", "lugar donde se forman jóvenes para el futuro")
+                        mediaPlayer?.release() // Liberar el reproductor de medios anterior si existe
+                        MediaPlayer.create(this@MapsActivity, R.raw.caldas)
+                        mediaPlayer?.start()
                         startActivity(intent)
                     } else if (position == 2) {
                         val intent = Intent(this@MapsActivity, LugaresActivity::class.java)
@@ -105,6 +110,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         intent.putExtra("latitude", 2.4419477932001885)
                         intent.putExtra("longitude", -76.6062739)
                         intent.putExtra("info", "Parque central de la ciudad de popayan")
+                        mediaPlayer?.release() // Liberar el reproductor de medios anterior si existe
+                        MediaPlayer.create(this@MapsActivity, R.raw.caldas)
+                        mediaPlayer?.start()
                         startActivity(intent)
                     } else if (position == 3) {
                         val intent = Intent(this@MapsActivity, LugaresActivity::class.java)
@@ -113,6 +121,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         intent.putExtra("latitude", 2.444638282857905)
                         intent.putExtra("longitude", -76.60015846325189)
                         intent.putExtra("info", "Lugar historico de la ciudad de popayan")
+                        mediaPlayer?.release() // Liberar el reproductor de medios anterior si existe
+                        mediaPlayer = MediaPlayer.create(this@MapsActivity, R.raw.morro)
+                        mediaPlayer?.start()
                         startActivity(intent)
                     } else {
                         Toast.makeText(this@MapsActivity, "Seleccione un lugar primero", Toast.LENGTH_SHORT).show()
@@ -121,22 +132,22 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                hideAllButtons()
+//                hideAllButtons()
             }
         }
     }
 
-    private fun showButtons(buttonToShow: Button) {
-        senaButton.visibility = if (buttonToShow == senaButton) View.VISIBLE else View.INVISIBLE
-        parqueButton.visibility = if (buttonToShow == parqueButton) View.VISIBLE else View.INVISIBLE
-        morroButton.visibility = if (buttonToShow == morroButton) View.VISIBLE else View.INVISIBLE
-    }
+//     private fun showButtons(buttonToShow: Button) {
+//        senaButton.visibility = if (buttonToShow == senaButton) View.VISIBLE else View.INVISIBLE
+//        parqueButton.visibility = if (buttonToShow == parqueButton) View.VISIBLE else View.INVISIBLE
+//        morroButton.visibility = if (buttonToShow == morroButton) View.VISIBLE else View.INVISIBLE
+//    }
 
-    private fun hideAllButtons() {
-        senaButton.visibility = View.INVISIBLE
-        parqueButton.visibility = View.INVISIBLE
-        morroButton.visibility = View.INVISIBLE
-    }
+//    private fun hideAllButtons() {
+//        senaButton.visibility = View.INVISIBLE
+//        parqueButton.visibility = View.INVISIBLE
+//        morroButton.visibility = View.INVISIBLE
+//    }
 
     private fun handleLocation(location: LatLng) {
         mMap.clear()
