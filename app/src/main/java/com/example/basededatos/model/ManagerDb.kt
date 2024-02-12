@@ -55,4 +55,19 @@ data class ManagerDb(val context:Context) {
         return result
     }
 
+    fun insertData3(nombre: String, latitude: Double, longitude: Double): Long {
+        openDbWr()// abrir bd en modo escritura
+        //Creo contenedor de valores para insertar data
+        val contenedor = ContentValues()
+        contenedor.put("nombre", nombre)
+        contenedor.put("latitude", latitude)
+        contenedor.put("longitude", longitude)
+        //llamo metodo insert
+
+        val resul = bd.insert("places", null, contenedor)
+
+        return resul
+
+    }
+
 }

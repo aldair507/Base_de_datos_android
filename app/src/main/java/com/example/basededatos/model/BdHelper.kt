@@ -11,6 +11,7 @@ class BdHelper(
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL(Constants.TABLA)
         db?.execSQL(Constants.TABLA2)
+        db?.execSQL(Constants.TABLA3)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, p1: Int, p2: Int) {

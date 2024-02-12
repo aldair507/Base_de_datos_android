@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Base de datos</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <array name="location_options">
+        <item>rutas</item>
+        <item>sena</item>
+        <item>Parque</item>
+        <item>morro</item>
+    </array>
 </resources>
