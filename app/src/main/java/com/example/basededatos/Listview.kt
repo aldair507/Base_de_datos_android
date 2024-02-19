@@ -21,6 +21,6 @@ class Listview : AppCompatActivity() {
         val listCiudad=binding.ListView
         val arrayAdapter=ArrayAdapter<Ciudad>(this,android.R.layout.simple_expandable_list_item_1,arrayCiudad)
         listCiudad.adapter=arrayAdapter
-        Toast.makeText(this,"datos listados",Toast.LENGTH_SHORT).show()
+        Toast.makeText(this,"datos listados.",Toast.LENGTH_SHORT).show()
     }
 }
