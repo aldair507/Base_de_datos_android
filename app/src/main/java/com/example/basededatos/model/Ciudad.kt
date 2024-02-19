@@ -1,4 +1,5 @@
 package com.example.basededatos.model
 
-class Ciudad {
+data class Ciudad (val cod:Int,val nombre:String,val codedep:Int) {
+
 }

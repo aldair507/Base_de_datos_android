@@ -1,12 +1,15 @@
 package com.example.basededatos
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.renderscript.ScriptGroup.Binding
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.basededatos.databinding.ActivityMainBinding
 import com.example.basededatos.model.BdHelper
 import com.example.basededatos.model.ManagerDb
+import com.example.lugares.LugaresActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,16 +26,25 @@ class MainActivity : AppCompatActivity() {
 */
 
         val boton = binding.boton
-
+        val manager = ManagerDb(this)
         boton.setOnClickListener {
-            val dep = binding.dep.text.toString().toInt()
+            val cod = binding.dep.text.toString()
             val nombre = binding.nombre.text.toString()
-            val codedep = binding.codigodep.text.toString().toInt()
+            val codedep = binding.codigodep.text.toString()
 
-            val manager = ManagerDb(this)
-            manager.insertData(dep, nombre, codedep)
 
-            Toast.makeText(this, "Base de datos creada", Toast.LENGTH_SHORT).show()
+
+
+            manager.insertData(cod.toInt(), nombre, codedep.toInt())
+
+            Toast.makeText(this, "Se gurdo la info", Toast.LENGTH_SHORT).show()
+
+
+        }
+
+        binding.btnVer.setOnClickListener{
+            val intent=Intent(this,Listview::class.java )
+            startActivity(intent)
         }
 
 
@@ -45,5 +57,5 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-    
+
 }

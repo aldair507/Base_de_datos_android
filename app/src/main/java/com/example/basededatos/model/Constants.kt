@@ -10,9 +10,12 @@ class Constants {
         const val NOM_DB="BdAdso"
 
         const val VERSION_BD= 5
-        const val TABLA="create table ciudad(cod int,nombre text, codeDep int)"
+        const val TABLA="create table ciudad(cod int,nombre text, codedep int)"
         const val TABLA2="create table data(cod int, nombre text, apellido text, telefono int,direccion text, ciudad text)"
         const val TABLA3 = "Create table places (nombre text,latitude double, longitude double)"
+        const val CONSULTA = "SELECT * FROM ciudad"
+
+
 
 
 
